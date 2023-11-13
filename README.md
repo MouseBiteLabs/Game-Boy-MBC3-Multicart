@@ -4,7 +4,7 @@ This is my design of a flashable MBC3-based multicart for the Game Boy. You can 
 
 The features are as follows:
 
-- Able to make a cartridge with either 2x 16 Mbit games or 4x 1Mbit games
+- Able to make a cartridge with either 2x 16 Mbit games or 4x 8 Mbit games
 - Optionally adds a pressable button to the cartridge (no shell cutting required)
   - The button can be configured to cycle games on the cart, reset the console, or both
 - Configurable to have separate save data for each game, or to share the same save data across multiple games
@@ -67,7 +67,55 @@ And this should go without saying, but if you're assembling these boards with a 
 
 ## Board Configurations
 
-Ooh boy.
+There's a lot to cover here. There are four separate switches to configure, and two different sizes of SRAM to pick from. 
+
+*Note that you can simply solder bridges from the middle pads of the switches to the left or right to the "ON" or "OFF" positions, instead of installing an actual switch.*
+
+### SRAM Size Selection
+
+Just to get the easy one out of the way first. There are two sizes of SRAM you can use.
+
+- If you use a 1024 Kbit SRAM (like the AS6C1008), then each game you put on the cartridge will have its own separate save files. If you program multiple copies of the same game, then you can effectively have multiple save files on the same cart. Easy example is Pokemon games - they only let you have one save file, but if you put Pokemon Red on the multicart four times, then that gives you four separate save files!
+- If you use a 256 Kbit SRAM (like the AS6C62256) then all the games you put on the cartridge will *share* the same RAM space.  This feature is probably only useful for Pokemon games. As an example: this means that if you made a cart that has Pokemon Red and Blue on it, you would play both versions with the same save data, as save data between the two games are compatible with each other.
+
+### Game Cycling Mode Switch (SW2)
+
+SW2, split into two separate switches SW2A (top half) and SW2B (bottom half), controls how you change games on the cartridge. The following table describes the different settings:
+
+| Mode | SW2A (Top) | SW2B (Bottom) | Game Change Method | Resets the Console? |
+| ---- | ---------- | ------------- | ------------------ | ------------------- |
+| 1    | OFF        | ON            | Cycle power        | Yes                 |
+| 2    | ON         | ON            | Press button       | Yes                 |
+| 3    | OFF        | OFF           | Press button       | No                  |
+| 4    | ON         | OFF           | No change          | Yes                 |
+
+*Note: Mode 4 does not require populating SW1, the push button, or U5, the flip-flop.*
+
+### Game and Save Data Configuration Switch (SW3)
+
+SW3, split into two separate switches SW3A (bottom half) and SW3B (top half), controls the order in which the ROM banks (the games) and the RAM banks (the save data) cycle. This table assumes you are using a 1024 Kbit SRAM chip, as a 256 Kbit SRAM will share save data across all ROMs.
+
+| Mode | SW3A | SW3B | ROM Banks  | RAM Banks   | Game 1     | Game 2     | Game 3     | Game 4     |
+| ---- | ---- | ---- | ---------- | ----------- | ---------- | ---------- | ---------- | ---------- |
+| A    | ON   | OFF  | 2x 16 Mbit | 4x 256 Kbit | ROM1, RAM1 | ROM1, RAM2 | ROM2, RAM3 | ROM2, RAM4 |
+| B    | OFF  | OFF  | 4x 8 Mbit  | 4x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 | ROM3, RAM3 | ROM4, RAM4 |
+| C    | ON   | ON   | 2x 16 Mbit | 2x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 |            |            |
+| D    | OFF  | ON   | 2x 8 Mbit  | 2x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 |            |            |
+
+*Note: Mode D is useless. Just use Mode C instead.*
+
+### Game Mode Examples
+
+Here's a list of example cartridges you can make with these settings:
+1) Pokemon Red, Blue, Yellow, and Green on one cartridge with separate save files that changes via powering the Game Boy off and on again: **Mode 1B** with 1024 Kbit SRAM
+2) Pokemon Gold and Silver with the same save file that hotswaps when you press the button on the cartridge (changing ames during gameplay): **Mode 3C** with 256 Kbit SRAM
+3) Pokemon Crystal with a reset button: **Mode 4A, 4B, or 4C** (program Pokemon Crystal into both ROM banks)
+
+## How to Program Games
+
+When using the GBxCart to program multiple games to the cartridge, it's recommended to turn SW2A and SW2B to the OFF position. To change ROM/RAM banks to program, simply press the button between programming steps. Using FlashGBX's "Refresh" button should show that the game information on the left of the screen changes after pressing the button.
+
+If you're programming the flash chip separate from the board, you'll need to concatenate all the ROM files together into one large 32 Mbit file to program the chip with.
 
 ## Test Points and Final Checkout
 
