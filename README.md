@@ -89,7 +89,7 @@ SW2, split into two separate switches SW2A (top half) and SW2B (bottom half), co
 | 3    | OFF        | OFF           | Press button       | No                  |
 | 4    | ON         | OFF           | No change          | Yes                 |
 
-*Note: Mode 4 does not require populating SW1, the push button, or U5, the flip-flop.*
+*Note: Mode 4 will effectively act as a single-game cartridge with an added reset button. This mode does not require populating SW1, U5, and U7. But it requires you to place SW3 into mode C, and restricts your game size to 2 MB and RAM size to 256 Kbit.*
 
 ### Game and Save Data Configuration Switch (SW3)
 
@@ -108,12 +108,12 @@ SW3, split into two separate switches SW3A (bottom half) and SW3B (top half), co
 
 Here's a list of example cartridges you can make with these settings:
 1) Pokemon Red, Blue, Yellow, and Green on one cartridge with separate save files that changes via powering the Game Boy off and on again: **Mode 1B** with 1 Mbit SRAM
-2) Pokemon Gold and Silver with the same save file that hotswaps when you press the button on the cartridge (changing ames during gameplay): **Mode 3C** with 256 Kbit SRAM
-3) Pokemon Crystal with a reset button: **Mode 4A, 4B, or 4C** (program Pokemon Crystal into both ROM banks)
+2) Pokemon Gold and Silver with the same save file that hotswaps when you press the button on the cartridge (changing games during gameplay): **Mode 3C** with 256 Kbit SRAM
+3) Pokemon Crystal with a reset button: **Mode 4C** with 256 Kbit SRAM
 
 ## How to Program Games
 
-When using the GBxCart to program multiple games to the cartridge, it's recommended to turn SW2A and SW2B to the OFF position. To change ROM/RAM banks to program, simply press the button between programming steps. Using FlashGBX's "Refresh" button should show that the game information on the left of the screen changes after pressing the button.
+When using the GBxCart to program multiple games to the cartridge, it's recommended to turn SW2A and SW2B to the OFF position. To change ROM/RAM banks to program, simply press the SW1 tactile button between programming steps. Using FlashGBX's "Refresh" button should show that the game information on the left of the screen changes after pressing the button.
 
 If you're programming the flash chip separate from the board, you'll need to concatenate all the ROM files together into one large 4 MB file to program the chip with.
 
@@ -131,7 +131,9 @@ After you assemble your game, you should measure the current out of the battery.
 
 ### Current Draw Measurements
 
-The revision of MBC3 chip you are using will influence how much current draw you get, and thus how long your battery life will last. For the test set up, I am replacing the battery with a regulated DC power supply set for 3 VDC for consistency, on a cart board with an MM1134 chip for U4, and brand new AS6C62256 SRAM.
+The revision of MBC3 chip you are using will influence how much current draw you get, and thus how long your battery life will last. For the test set up, I am replacing the battery with a regulated DC power supply set for 3 VDC for consistency, on my regular MBC3 cart board with an MM1134 chip for U4, and brand new AS6C62256 SRAM.
+
+These numbers are for reference only - to help you decide which MBC3 revision to use for your game, if you have a choice. The current required for retaining save data on the multicart will be slightly higher due to the extra components compared to a regular MBC3 cartridge.
 
 | Rev   | P/N      | Current draw (no RTC) | Current draw (with RTC) |
 | ----- | -------- | --------------------- | ----------------------- |
@@ -166,7 +168,7 @@ The revision of MBC3 chip you are using will influence how much current draw you
 | R8                    | 10k                    | 0603           | Resistor           | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
 | R9                    | 130k                   | 0603           | Resistor           | [https://mou.sr/3MjXliy](https://mou.sr/3MjXliy) |
 | R10                   | 49.9k                  | 0603           | Resistor           | [https://mou.sr/3Q3NRZO](https://mou.sr/3Q3NRZO) |
-| SW1                   | See note               | 5.2 x 5.2mm    | Tactile Switch     | See note                                         |
+| SW1                   | See note               | 5.2 x 5.2mm    | Tactile Switch     | [https://mou.sr/3uipCQz](https://mou.sr/3uipCQz) OR see note               |
 | SW2                   | CAS-D20TA              | J Form Lead    | Dual SPDT          | [https://mou.sr/46gGqF1](https://mou.sr/46gGqF1) |
 | SW3                   | CAS-D20TA              | J Form Lead    | Dual SPDT          | [https://mou.sr/46gGqF1](https://mou.sr/46gGqF1) |
 | U1                    | 29F032, 29F033         | TSOP-40        | Flash EEPROM       | AliExpress or eBay                               |
@@ -182,11 +184,11 @@ The revision of MBC3 chip you are using will influence how much current draw you
 
 SW1 can be either short or long. If the button is long enough, it will sit inside the shell in a way that lets you press it by lightly pressing on the cartridge shell. This way, you can activate it without removing it from the console. This is helpful if you want to change games via a button press.
 
-- If you want to make the button pressable when the cartridge is fully assembled, you need to find a switch that has an extended stem on AliExpress, eBay, or Amazon. The measurements will be 5.2 mm x 5.2 mm, with a height of 3.5 mm. Sometimes these parts are listed as "4 mm x 4 mm" or "5 mm x 5 mm" instead. Check the datasheet, if available, to see if it'll fit the footprint. They should have listing pictures similar to this:
+- If you want to make the button pressable when the cartridge is fully assembled, you need to find a switch that has an extended stem on AliExpress, eBay, or Amazon (**if you find a compatible switch on Mouser or Digikey, please let me know**). The measurements will be 5.2 mm x 5.2 mm, with a height of 3.5 mm. Sometimes these parts are listed as "4 mm x 4 mm" or "5 mm x 5 mm" instead. Check the datasheet, if available, to see if it'll fit the footprint. They should have listing pictures similar to the ones seen here:
 
 ![image](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Multicart/assets/97127539/57f93dff-8af2-446d-9d30-69dc870ae9df)
 
-- If you don't care about pressing the button, like if you are making a multicart that changes games by cycling the power where you wouldn't need it, then you can use the TS18-5-25-SL-260-SMT-TR (https://mou.sr/3uipCQz).
+- If you don't care about pressing the button while it's in the shell, like if you are making a multicart that changes games by cycling the power where you wouldn't need it, then you can simply use the TS18-5-25-SL-260-SMT-TR (https://mou.sr/3uipCQz).
 
 ### Usable Donor Cartridge Parts
 
