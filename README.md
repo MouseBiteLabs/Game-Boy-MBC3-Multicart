@@ -1,10 +1,10 @@
-# Game Boy MBC3 Multicart - UNDER CONSTRUCTION
+# Game Boy MBC3 Multicart
 
 This is my design of a flashable MBC3-based multicart for the Game Boy. You can make a 2-in-1 or 4-in-1 cartridge, that changes games based on a button press or power cycling the Game Boy. With this board you can also make a single game, but with the addition of a pressable reset button on the cartridge.
 
 The features are as follows:
 
-- Able to make a cartridge with either 2x 16 Mbit games or 4x 8 Mbit games
+- Able to make a cartridge with either 2x 2 MB games or 4x 1 MB games
 - Optionally adds a pressable button to the cartridge (no shell cutting required)
   - The button can be configured to cycle games on the cart, reset the console, or both
 - Configurable to have separate save data for each game, or to share the same save data across multiple games
@@ -75,7 +75,7 @@ There's a lot to cover here. There are four separate switches to configure, and 
 
 Just to get the easy one out of the way first. There are two sizes of SRAM you can use.
 
-- If you use a 1024 Kbit SRAM (like the AS6C1008), then each game you put on the cartridge will have its own separate save files. If you program multiple copies of the same game, then you can effectively have multiple save files on the same cart. Easy example is Pokemon games - they only let you have one save file, but if you put Pokemon Red on the multicart four times, then that gives you four separate save files!
+- If you use a 1 Mbit SRAM (like the AS6C1008), then each game you put on the cartridge will have its own separate save files. If you program multiple copies of the same game, then you can effectively have multiple save files on the same cart. Easy example is Pokemon games - they only let you have one save file, but if you put Pokemon Red on the multicart four times, then that gives you four separate save files!
 - If you use a 256 Kbit SRAM (like the AS6C62256) then all the games you put on the cartridge will *share* the same RAM space.  This feature is probably only useful for Pokemon games. As an example: this means that if you made a cart that has Pokemon Red and Blue on it, you would play both versions with the same save data, as save data between the two games are compatible with each other.
 
 ### Game Cycling Mode Switch (SW2)
@@ -93,7 +93,7 @@ SW2, split into two separate switches SW2A (top half) and SW2B (bottom half), co
 
 ### Game and Save Data Configuration Switch (SW3)
 
-SW3, split into two separate switches SW3A (bottom half) and SW3B (top half), controls the order in which the ROM banks (the games) and the RAM banks (the save data) cycle. This table assumes you are using a 1024 Kbit SRAM chip, as a 256 Kbit SRAM will share save data across all ROMs.
+SW3, split into two separate switches SW3A (bottom half) and SW3B (top half), controls the order in which the ROM banks (the games) and the RAM banks (the save data) cycle. This table assumes you are using a 1 Mbit SRAM chip, as a 256 Kbit SRAM will share save data across all ROMs.
 
 | Mode | SW3A | SW3B | ROM Banks  | RAM Banks   | Game 1     | Game 2     | Game 3     | Game 4     |
 | ---- | ---- | ---- | ---------- | ----------- | ---------- | ---------- | ---------- | ---------- |
@@ -107,7 +107,7 @@ SW3, split into two separate switches SW3A (bottom half) and SW3B (top half), co
 ### Game Mode Examples
 
 Here's a list of example cartridges you can make with these settings:
-1) Pokemon Red, Blue, Yellow, and Green on one cartridge with separate save files that changes via powering the Game Boy off and on again: **Mode 1B** with 1024 Kbit SRAM
+1) Pokemon Red, Blue, Yellow, and Green on one cartridge with separate save files that changes via powering the Game Boy off and on again: **Mode 1B** with 1 Mbit SRAM
 2) Pokemon Gold and Silver with the same save file that hotswaps when you press the button on the cartridge (changing ames during gameplay): **Mode 3C** with 256 Kbit SRAM
 3) Pokemon Crystal with a reset button: **Mode 4A, 4B, or 4C** (program Pokemon Crystal into both ROM banks)
 
@@ -115,7 +115,7 @@ Here's a list of example cartridges you can make with these settings:
 
 When using the GBxCart to program multiple games to the cartridge, it's recommended to turn SW2A and SW2B to the OFF position. To change ROM/RAM banks to program, simply press the button between programming steps. Using FlashGBX's "Refresh" button should show that the game information on the left of the screen changes after pressing the button.
 
-If you're programming the flash chip separate from the board, you'll need to concatenate all the ROM files together into one large 32 Mbit file to program the chip with.
+If you're programming the flash chip separate from the board, you'll need to concatenate all the ROM files together into one large 4 MB file to program the chip with.
 
 ## Test Points and Final Checkout
 
@@ -135,25 +135,66 @@ The revision of MBC3 chip you are using will influence how much current draw you
 
 | Rev   | P/N      | Current draw (no RTC) | Current draw (with RTC) |
 | ----- | -------- | --------------------- | ----------------------- |
+| MBC3  | P-1      |           ?            |            ?             |
 | MBC3  | LR385364 |          ?             |            ?             |
 | MBC3  | BU3631K  |          ?             |            ?             |
-| MBC3A | LR38536B |          ?             |            ?             |
-| MBC3A | BU3632K  |          ?             |            ?             |
-| MBC3A | P-2      |          ?             |            ?             |
+| MBC3A | LR38536B |          0.1 uA             |            1.5 uA             |
+| MBC3A | BU3632K  |          0.5 uA             |            1.5 uA             |
+| MBC3A | P-2      |          0.5 uA             |            3.9 uA             |
 | MBC3B | BU3634K  |          ?             |             ?            |
-| MBC3B | P-2      |          ?            |              ?           |
+| MBC3B | P-2      |          0.4 uA            |              3.7 uA           |
+
+*If you have one of the revisions of MBC3 chips that either have a question mark in the table, or is missing from the table, please contact me!*
 
 ## Bill of Materials (BOM)
 
+| Reference Designators | Value/Part Number      | Package        | Description        | Source                                           |
+| --------------------- | ---------------------- | -------------- | ------------------ | ------------------------------------------------ |
+| B1                    | CR2032, CR2025, CR2016 | CR2032         | Backup Battery     | [https://mou.sr/3SeAzfT](https://mou.sr/3SeAzfT) |
+| C1                    | 0.1uF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
+| C2                    | 15 pF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3PPorjO](https://mou.sr/3PPorjO) |
+| C3                    | 15 pF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3PPorjO](https://mou.sr/3PPorjO) |
+| C4                    | 0.1uF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
+| C5                    | 0.1uF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
+| C6                    | 10uF                   | 0603           | Capacitor (MLCC)   | [https://mou.sr/3mZtSkF](https://mou.sr/3mZtSkF) |
+| C7                    | 0.1uF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
+| C8                    | 0.1uF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
+| Q1                    | 2N7002                 | SOT-23         | N-Channel FET      | [https://mou.sr/3rgfh6J](https://mou.sr/3rgfh6J) |
+| R1                    | 10k                    | 0603           | Resistor           | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
+| R2                    | 330k                   | 0603           | Resistor           | [https://mou.sr/3PZ2pvj](https://mou.sr/3PZ2pvj) |
+| R5                    | 10k                    | 0603           | Resistor           | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
+| R8                    | 10k                    | 0603           | Resistor           | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
+| R9                    | 130k                   | 0603           | Resistor           | [https://mou.sr/3MjXliy](https://mou.sr/3MjXliy) |
+| R10                   | 49.9k                  | 0603           | Resistor           | [https://mou.sr/3Q3NRZO](https://mou.sr/3Q3NRZO) |
+| SW1                   | See note               | 5.2 x 5.2mm    | Tactile Switch     | See note                                         |
+| SW2                   | CAS-D20TA              | J Form Lead    | Dual SPDT          | [https://mou.sr/46gGqF1](https://mou.sr/46gGqF1) |
+| SW3                   | CAS-D20TA              | J Form Lead    | Dual SPDT          | [https://mou.sr/46gGqF1](https://mou.sr/46gGqF1) |
+| U1                    | 29F032, 29F033         | TSOP-40        | Flash EEPROM       | AliExpress or eBay                               |
+| U2                    | MBC3                   | QFP-32         | MBC3 Mapper        | Donor MBC3 Game Boy cartridge                    |
+| U3                    | AS6C62256, AS6C1008    | SOP-28, SOP-32 | SRAM               | [https://mou.sr/3sFegFF](https://mou.sr/3sFegFF) |
+| U4                    | TPS3613                | MSOP-10        | Battery Management | [https://mou.sr/45Ir2kh](https://mou.sr/45Ir2kh) |
+| U5                    | SN74HCS74              | TSSOP-14       | Dual Flip Flop     | [https://mou.sr/3QYGEuT](https://mou.sr/3QYGEuT) |
+| U6                    | SN74AHC1G08            | SOT-23-5       | 2-input AND Gate   | [https://mou.sr/3Bku2qj](https://mou.sr/3Bku2qj) |
+| U7                    | SN74AHC1G08            | SOT-23-5       | 2-input AND Gate   | [https://mou.sr/3Bku2qj](https://mou.sr/3Bku2qj) |
+| X1                    | 32.768 kHz             | Radial         | Crystal Oscillator | [https://mou.sr/3ZteKuy](https://mou.sr/3ZteKuy) |
 
+### Note about SW1
+
+SW1 can be either short or long. If the button is long enough, it will sit inside the shell in a way that lets you press it by lightly pressing on the cartridge shell. This way, you can activate it without removing it from the console. This is helpful if you want to change games via a button press.
+
+- If you want to make the button pressable when the cartridge is fully assembled, you need to find a switch that has an extended stem on AliExpress, eBay, or Amazon. The measurements will be 5.2 mm x 5.2 mm, with a height of 3.5 mm. Sometimes these parts are listed as "4 mm x 4 mm" or "5 mm x 5 mm" instead. Check the datasheet, if available, to see if it'll fit the footprint. They should have listing pictures similar to this:
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Multicart/assets/97127539/57f93dff-8af2-446d-9d30-69dc870ae9df)
+
+- If you don't care about pressing the button, like if you are making a multicart that changes games by cycling the power where you wouldn't need it, then you can use the TS18-5-25-SL-260-SMT-TR (https://mou.sr/3uipCQz).
 
 ### Usable Donor Cartridge Parts
 
 You can use a few parts from the donor cart on the new board to save some money. Note that you will generally get better reliability with new parts as opposed to old ones. For example: I have seen failed RAM chips from donors in the past.
 
-1) **C2, C3, R2, X1: RTC Components** - You can move over these parts if you're using the real-time clock function
+1) **C1, C2, R2, X1: RTC Components** - You can move over these parts if you're using the real-time clock function. Note that C1 and C2 are designated as C2 and C3 on my board. They're the same value, so they're interchangeable.
 2) **U2: MBC3** - This one is required
-3) **U3: SRAM** - You can use this part *only if* the sum of the RAM space for the games you're using is the same or less amount of RAM that the donor cartridge does
+3) **U3: SRAM** - You can use this part *only if* the sum of the RAM space for the games you're using is the same or less amount of RAM that the donor cartridge has. If you plan to have separate save data for every game, you'll probably need to buy an AS6C1008.
 
 You could probably transfer over most of the 0.1uF capacitors but they're pretty cheap anyway, so I generally just recommend buying new resistors and capacitors.
 
@@ -162,12 +203,18 @@ You could probably transfer over most of the 0.1uF capacitors but they're pretty
 - The 29F032 and 29F033 have been known to occasionally be defective upon arrival. They're either used, or new old stock, and usually only available from AliExpress.
 - The footprint for the battery can fit a CR2032, CR2025, or CR2016 with solder tabs. The only difference is the mAh capacity (larger number = longer life). If you get Panasonic tabbed batteries, you may have to trim the battery tabs to make them fit on the footprint.
   - For untabbed coin cells, you can find battery retainer adapters online, <a href="https://retrogamerepairshop.com/products/hdr-game-boy-game-battery-retainer?variant=40511013290156">like this one.</a>
-- Kb is kilo**bits** and Mb is mega**bits**. Sometimes you will find game ROM and RAM sizes defined in terms of KB or kilo**bytes** and MB or mega**bytes**. You can convert Kb and Mb to KB and MB by dividing Kb or Mb by 8. For example, 256 Kb = 32 KB.
+- Generally, ROM sizes are conveyed in terms of kilobytes (KB) and megabytes (KB, MB). RAM size is usually conveyed in terms of kilobits or megabits (Kbit, Mbit). You can convert Kbit and Mbit to KB and MB by dividing Kbit or Mbit by 8. For example, 256 Kbit = 32 KB.
 
 ## Revision History
 
+### v1.2
+- Changed C3 to Z1
+
 ### v1.1
-- 
+- Fix schematic errors
+- Extended cart edge down by 0.25 mm for better fitment
+- Added OSHW logo and "SUPPORT ORIGINAL CREATORS!"
+
 ### v1.0
 - Prototype revision
 
