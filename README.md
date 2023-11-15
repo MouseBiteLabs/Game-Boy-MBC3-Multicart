@@ -97,10 +97,10 @@ SW3, split into two separate switches SW3A (bottom half) and SW3B (top half), co
 
 | Mode | SW3A | SW3B | ROM Banks  | RAM Banks   | Game 1     | Game 2     | Game 3     | Game 4     |
 | ---- | ---- | ---- | ---------- | ----------- | ---------- | ---------- | ---------- | ---------- |
-| A    | ON   | OFF  | 2x 16 Mbit | 4x 256 Kbit | ROM1, RAM1 | ROM1, RAM2 | ROM2, RAM3 | ROM2, RAM4 |
-| B    | OFF  | OFF  | 4x 8 Mbit  | 4x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 | ROM3, RAM3 | ROM4, RAM4 |
-| C    | ON   | ON   | 2x 16 Mbit | 2x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 |            |            |
-| D    | OFF  | ON   | 2x 8 Mbit  | 2x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 |            |            |
+| A    | ON   | OFF  | 2x 2 MB    | 4x 256 Kbit | ROM1, RAM1 | ROM1, RAM2 | ROM2, RAM3 | ROM2, RAM4 |
+| B    | OFF  | OFF  | 4x 1 MB    | 4x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 | ROM3, RAM3 | ROM4, RAM4 |
+| C    | ON   | ON   | 2x 2 MB    | 2x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 |            |            |
+| D    | OFF  | ON   | 2x 1 MB    | 2x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 |            |            |
 
 *Note: Mode D is useless. Just use Mode C instead.*
 
