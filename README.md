@@ -67,9 +67,17 @@ And this should go without saying, but if you're assembling these boards with a 
 
 ## Board Configurations
 
-There's a lot to cover here. There are four separate switches to configure, and two different sizes of SRAM to pick from. 
+There's a lot to cover here. There are four separate switches to configure, and two different sizes of SRAM to pick from. You also can add a real-time clock to the cartridge for games that needed it.
 
 *Note that you can simply solder bridges from the middle pads of the switches to the left or right to the "ON" or "OFF" positions, instead of installing an actual switch.*
+
+### Real-Time Clock (RTC)
+
+If your game uses an RTC, populate C2, C3, R2, and X1 as indicated in the BOM.
+
+If your game does *not* use the RTC function, you can omit these parts. But you need to bridge the pads of C3.
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Cartridge/assets/97127539/d46ea632-6318-4e5d-bf40-c4e9a7f52aa1)
 
 ### SRAM Size Selection
 
@@ -168,11 +176,11 @@ These numbers are for reference only - to help you decide which MBC3 revision to
 | R8                    | 10k                    | 0603           | Resistor           | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
 | R9                    | 130k                   | 0603           | Resistor           | [https://mou.sr/3MjXliy](https://mou.sr/3MjXliy) |
 | R10                   | 49.9k                  | 0603           | Resistor           | [https://mou.sr/3Q3NRZO](https://mou.sr/3Q3NRZO) |
-| SW1                   | See note               | 5.2 x 5.2mm    | Tactile Switch     | [https://mou.sr/3uipCQz](https://mou.sr/3uipCQz) OR see note               |
+| SW1                   | See note               | 5.2 x 5.2mm    | Tactile Switch     | [https://mou.sr/3uipCQz](https://mou.sr/3uipCQz) OR see note |
 | SW2                   | CAS-D20TA              | J Form Lead    | Dual SPDT          | [https://mou.sr/46gGqF1](https://mou.sr/46gGqF1) |
 | SW3                   | CAS-D20TA              | J Form Lead    | Dual SPDT          | [https://mou.sr/46gGqF1](https://mou.sr/46gGqF1) |
 | U1                    | 29F032, 29F033         | TSOP-40        | Flash EEPROM       | AliExpress or eBay                               |
-| U2                    | MBC3                   | QFP-32         | MBC3 Mapper        | Donor MBC3 Game Boy cartridge                    |
+| U2                    | MBC3A or MBC3B         | QFP-32         | MBC3 Mapper        | Donor MBC3 Game Boy cartridge                    |
 | U3                    | AS6C62256, AS6C1008    | SOP-28, SOP-32 | SRAM               | [https://mou.sr/3sFegFF](https://mou.sr/3sFegFF) |
 | U4                    | TPS3613                | MSOP-10        | Battery Management | [https://mou.sr/45Ir2kh](https://mou.sr/45Ir2kh) |
 | U5                    | SN74HCS74              | TSSOP-14       | Dual Flip Flop     | [https://mou.sr/3QYGEuT](https://mou.sr/3QYGEuT) |
@@ -190,12 +198,18 @@ SW1 can be either short or long. If the button is long enough, it will sit insid
 
 - If you don't care about pressing the button while it's in the shell, like if you are making a multicart that changes games by cycling the power where you wouldn't need it, then you can simply use the TS18-5-25-SL-260-SMT-TR (https://mou.sr/3uipCQz).
 
+### Note about MBC3 Revisions
+
+If you have a choice, I recommend against using the original revision-less MBC3 mapper for this specific circuit board. You should use an MBC3A or MBC3B if possible. Save the revision-less MBC3 chips for regular MBC3 cartridges!
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Multicart/assets/97127539/429f5e91-2385-44e5-9e8a-a10cac201266)
+
 ### Usable Donor Cartridge Parts
 
 You can use a few parts from the donor cart on the new board to save some money. Note that you will generally get better reliability with new parts as opposed to old ones. For example: I have seen failed RAM chips from donors in the past.
 
 1) **C1, C2, R2, X1: RTC Components** - You can move over these parts if you're using the real-time clock function. Note that C1 and C2 are designated as C2 and C3 on my board. They're the same value, so they're interchangeable.
-2) **U2: MBC3** - This one is required
+2) **U2: MBC3A or MBC3B** - This one is required
 3) **U3: SRAM** - You can use this part *only if* the sum of the RAM space for the games you're using is the same or less amount of RAM that the donor cartridge has. If you plan to have separate save data for every game, you'll probably need to buy an AS6C1008.
 
 You could probably transfer over most of the 0.1uF capacitors but they're pretty cheap anyway, so I generally just recommend buying new resistors and capacitors.
