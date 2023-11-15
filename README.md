@@ -204,6 +204,8 @@ If you have a choice, I recommend against using the original revision-less MBC3 
 
 ![image](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Multicart/assets/97127539/429f5e91-2385-44e5-9e8a-a10cac201266)
 
+*[Images of MBC3 chips from <a href="https://gbhwdb.gekkio.fi/cartridges/mbc3.html">Game Boy Hardware Database</a>.]*
+
 ### Usable Donor Cartridge Parts
 
 You can use a few parts from the donor cart on the new board to save some money. Note that you will generally get better reliability with new parts as opposed to old ones. For example: I have seen failed RAM chips from donors in the past.
