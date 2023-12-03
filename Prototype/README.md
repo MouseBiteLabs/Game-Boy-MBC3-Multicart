@@ -1,6 +1,6 @@
 # Prototype Board Information
 
-Only follow this if you have a v1.1 board!!
+Only follow this if you have a v1.0 or v1.1 board!!
 
 ## Board Configurations
 
