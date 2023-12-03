@@ -137,7 +137,7 @@ On the back of the board are five test points. Here's where they are connected:
 
 After you assemble your game, you should measure the current out of the battery. But first, you should program it with the GBxCart, or if you programmed the EEPROM separately, put it into a Game Boy and cycle power once. Then, flip the PCB upside down on a non-conductive surface (not your leg), and set your multimeter in DC millivolts (or volts). Put the positive probe on TP3 and the negative probe on TP2. If you used a 10kΩ for R1, as indicated in the BOM, you should read a voltage in the single or tens of millivolts for non-RTC games, or up to 60 mV for games using a real-time clock. If you have something much higher, especially voltages above 60mV, then you likely have an issue or short circuit on the board somewhere.
 
-### Current Draw Measurements
+### Current Draw Measurements and Battery Selection
 
 The revision of MBC3 chip you are using will influence how much current draw you get, and thus how long your battery life will last. For the test set up, I am replacing the battery with a regulated DC power supply set for 3 VDC for consistency, on my regular MBC3 cart board with an MM1134 chip for U4, and brand new AS6C62256 SRAM.
 
@@ -145,16 +145,24 @@ These numbers are for reference only - to help you decide which MBC3 revision to
 
 | Rev   | P/N      | Current draw (no RTC) | Current draw (with RTC) |
 | ----- | -------- | --------------------- | ----------------------- |
-| MBC3  | P-1      |           ?            |            ?             |
-| MBC3  | LR385364 |          ?             |            ?             |
-| MBC3  | BU3631K  |          ?             |            ?             |
 | MBC3A | LR38536B |          0.1 uA             |            1.5 uA             |
 | MBC3A | BU3632K  |          0.5 uA             |            1.5 uA             |
 | MBC3A | P-2      |          0.5 uA             |            3.9 uA             |
-| MBC3B | BU3634K  |          ?             |             ?            |
+| MBC3B | BU3634K  |          0.6 uA             |             1.5 uA            |
 | MBC3B | P-2      |          0.4 uA            |              3.7 uA           |
 
 *If you have one of the revisions of MBC3 chips that either have a question mark in the table, or is missing from the table, please contact me!*
+
+#### Battery Size Considerations
+
+The coin cells commonly used on Game Boy carts in order of increasing size are CR2016, CR2025, and CR2032. The CR2032 is the thickest, but yields the longest battery life.
+
+Batteries that are as large as CR2032 will fit inside the shell, *however*, due to the thickness of the CR2032, using one makes it so the shell cannot be pressed down very easily. This makes the button inside the shell difficult to press reliably. For this reason, I recommend either:
+
+- Using a CR2025 with a low-power consumption MBC3 chip (or, without RTC)
+- Using a CR2032 with a multicart that changes games via power cycling only
+
+You should still be able to get 10+ years of battery life out of a CR2025 and a non-P-2 revision MBC3 chip. <a href="https://github.com/MouseBiteLabs/Game-Boy-MBC3-Cartridge/tree/main/Technical#estimating-battery-life">See this section in my main MBC3 repository for estimating battery life here.</a>
 
 ## Bill of Materials (BOM)
 
