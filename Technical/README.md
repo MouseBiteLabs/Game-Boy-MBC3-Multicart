@@ -6,7 +6,7 @@ Please correct me on any information I may have gotten wrong.
 
 ## Schematic
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Multicart/assets/97127539/d0b08991-53ee-4bca-b7ae-edaa103427b0)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Multicart/assets/97127539/12436d7e-bb78-42d5-bc1a-bb9e955f22bd)
 
 ## Multicart Basics
 
