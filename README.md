@@ -135,7 +135,7 @@ On the back of the board are five test points. Here's where they are connected:
 - TP4: Ground
 - TP5: VCC input voltage
 
-After you assemble your game, you should measure the current out of the battery. But first, you should program it with the GBxCart, or if you programmed the EEPROM separately, put it into a Game Boy and cycle power once. Then, flip the PCB upside down on a non-conductive surface (not your leg), and set your multimeter in DC millivolts (or volts). Put the positive probe on TP3 and the negative probe on TP2. If you used a 10kΩ for R1, as indicated in the BOM, you should read a voltage in the single or tens of millivolts for non-RTC games, or up to 60 mV for games using a real-time clock. If you have something much higher, especially voltages above 60mV, then you likely have an issue or short circuit on the board somewhere.
+After you assemble your game, you should measure the current out of the battery. But first, you should program it with the GBxCart, or if you programmed the EEPROM separately, put it into a Game Boy and cycle power once. Then, flip the PCB upside down on a non-conductive surface (not your leg), and set your multimeter in DC millivolts (or volts). Put the positive probe on TP3 and the negative probe on TP2. If you used a 10kΩ for R1, as indicated in the BOM, you should read a voltage in the single or tens of millivolts for non-RTC games, or up to 60 mV for games using a real-time clock. If you have something much higher, especially voltages above 100mV, then you likely have an issue or short circuit on the board somewhere.
 
 ### Current Draw Measurements and Battery Selection
 
@@ -151,7 +151,7 @@ These numbers are for reference only - to help you decide which MBC3 revision to
 | MBC3B | BU3634K  |          0.6 uA             |             1.5 uA            |
 | MBC3B | P-2      |          0.4 uA            |              3.7 uA           |
 
-*If you have one of the revisions of MBC3 chips that either have a question mark in the table, or is missing from the table, please contact me!*
+*If you have one of the revisions of MBC3 chips is missing from the table, please contact me!*
 
 #### Battery Size Considerations
 
