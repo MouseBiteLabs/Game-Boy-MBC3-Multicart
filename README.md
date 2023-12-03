@@ -1,4 +1,4 @@
-# Game Boy MBC3 Multicart
+# Game Boy MBC3 Multicart - Under Construction
 
 This is my design of a flashable MBC3-based multicart for the Game Boy. You can make a 2-in-1 or 4-in-1 cartridge, that changes games based on a button press or power cycling the Game Boy. With this board you can also make a single game, but with the addition of a pressable reset button on the cartridge.
 
@@ -49,7 +49,7 @@ You can use the zipped folder at any board fabricator you like. You may also buy
 
 [link]
 
-<a href="">The board is also listed on OSH Park as well.</a> **Be sure to get them in 0.8mm thickness if you order from here.**
+<a href="https://oshpark.com/shared_projects/Rwnxg5bh">The board is also listed on OSH Park as well.</a> **Be sure to get them in 0.8mm thickness if you order from here.**
 
 ## Required Equipment
 
@@ -73,11 +73,11 @@ There's a lot to cover here. There are four separate switches to configure, and 
 
 ### Real-Time Clock (RTC)
 
-If your game uses an RTC, populate C2, C3, R2, and X1 as indicated in the BOM.
+If your game uses an RTC, populate C2, R2, X1, and Z1 as indicated in the BOM.
 
-If your game does *not* use the RTC function, you can omit these parts. But you need to bridge the pads of C3.
+If your game does *not* use the RTC function, you can omit these parts, but you also need to bridge the pads of Z1 with solder.
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Cartridge/assets/97127539/d46ea632-6318-4e5d-bf40-c4e9a7f52aa1)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Multicart/assets/97127539/8fe6b4fe-dcd9-4eca-b1ab-f2b6cc73f4ff)
 
 ### SRAM Size Selection
 
@@ -90,14 +90,14 @@ There are two sizes of SRAM you can use, and the type you use will dictate how y
 
 SW2, split into two separate switches SW2A (top half) and SW2B (bottom half), controls how you change games on the cartridge. The following table describes the different settings:
 
-| Mode | SW2A (Top) | SW2B (Bottom) | Game Change Method | Resets the Console? |
-| ---- | ---------- | ------------- | ------------------ | ------------------- |
-| 1    | OFF        | ON            | Cycle power        | Yes                 |
-| 2    | ON         | ON            | Press button       | Yes                 |
-| 3    | OFF        | OFF           | Press button       | No                  |
-| 4    | ON         | OFF           | No change          | Yes                 |
+| Mode | SW2A (Top) | SW2B (Bottom) | Game change with reset? | Game change with button press? | Does the button reset? |
+| ---- | ---------- | ------------- | ----------------------- | ------------------------------ | ---------------------- |
+| 1    | OFF        | OFF           | No                      | Yes                            | Yes                    |
+| 2    | OFF        | ON            | Yes                     | Yes                            | Yes                    |
+| 3    | ON         | OFF           | No                      | Yes                            | No                     |
+| 4    | ON         | ON            | Yes                     | No                             | No                     |
 
-*Note: Mode 4 will effectively act as a single-game cartridge with an added reset button. This mode does not require populating SW1, U5, and U7. But it requires you to place SW3 into mode C, and restricts your game size to 2 MB and RAM size to 256 Kbit.*
+*Note: Mode 4 is essentially Mode 2, but without button functionality.*
 
 ### Game and Save Data Configuration Switch (SW3)
 
@@ -115,9 +115,9 @@ SW3, split into two separate switches SW3A (bottom half) and SW3B (top half), co
 ### Game Mode Examples
 
 Here's a list of example cartridges you can make with these settings:
-1) Pokemon Red, Blue, Yellow, and Green on one cartridge with separate save files that changes via powering the Game Boy off and on again: **Mode 1B** with 1 Mbit SRAM
-2) Pokemon Gold and Silver with the same save file that hotswaps when you press the button on the cartridge (changing games during gameplay): **Mode 3C** with 256 Kbit SRAM
-3) Pokemon Crystal with a reset button: **Mode 4C** with 256 Kbit SRAM
+1) Pokemon Red, Blue, Yellow, and Green on one cartridge with separate save files that changes only via pressing the button, which also resets the game: **Mode 1B** with 1 Mbit SRAM
+2) Pokemon Gold and Silver with separate save files that changes by pressing the button *or* cycling power on the Game Boy: **Mode 2C** with 1 Mbit SRAM
+3) Pokemon Gold and Silver with the same save file that hotswaps when you press the button on the cartridge (changing games during gameplay): **Mode 3C** with 256 Kbit SRAM
 
 ## How to Program Games
 
@@ -145,11 +145,11 @@ These numbers are for reference only - to help you decide which MBC3 revision to
 
 | Rev   | P/N      | Current draw (no RTC) | Current draw (with RTC) |
 | ----- | -------- | --------------------- | ----------------------- |
-| MBC3A | LR38536B |          0.1 uA             |            1.5 uA             |
-| MBC3A | BU3632K  |          0.5 uA             |            1.5 uA             |
-| MBC3A | P-2      |          0.5 uA             |            3.9 uA             |
-| MBC3B | BU3634K  |          0.6 uA             |             1.5 uA            |
-| MBC3B | P-2      |          0.4 uA            |              3.7 uA           |
+| MBC3A | LR38536B |     0.1 uA            |      1.5 uA             |
+| MBC3A | BU3632K  |     0.5 uA            |      1.5 uA             |
+| MBC3A | P-2      |     0.5 uA            |      3.9 uA             |
+| MBC3B | BU3634K  |     0.6 uA            |      1.5 uA             |
+| MBC3B | P-2      |     0.4 uA            |      3.7 uA             |
 
 *If you have one of the revisions of MBC3 chips is missing from the table, please contact me!*
 
@@ -164,6 +164,8 @@ Batteries that are as large as CR2032 will fit inside the shell, *however*, due 
 
 You should still be able to get 10+ years of battery life out of a CR2025 and a non-P-2 revision MBC3 chip. <a href="https://github.com/MouseBiteLabs/Game-Boy-MBC3-Cartridge/tree/main/Technical#estimating-battery-life">See this section in my main MBC3 repository for estimating battery life here.</a>
 
+I haven't tested it, but I believe using battery holders instead of pre-tabbed batteries will similarly cause issues with trying to press the button in the middle of the cartridge.
+
 ## Bill of Materials (BOM)
 
 | Reference Designators | Value/Part Number      | Package        | Description        | Source                                           |
@@ -171,7 +173,7 @@ You should still be able to get 10+ years of battery life out of a CR2025 and a 
 | B1                    | CR2032, CR2025, CR2016 | CR2032         | Backup Battery     | [https://mou.sr/3SeAzfT](https://mou.sr/3SeAzfT) |
 | C1                    | 0.1uF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
 | C2                    | 15 pF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3PPorjO](https://mou.sr/3PPorjO) |
-| C3                    | 15 pF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3PPorjO](https://mou.sr/3PPorjO) |
+| Z1                    | 15 pF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3PPorjO](https://mou.sr/3PPorjO) |
 | C4                    | 0.1uF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
 | C5                    | 0.1uF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
 | C6                    | 10uF                   | 0603           | Capacitor (MLCC)   | [https://mou.sr/3mZtSkF](https://mou.sr/3mZtSkF) |
@@ -192,8 +194,9 @@ You should still be able to get 10+ years of battery life out of a CR2025 and a 
 | U3                    | AS6C62256, AS6C1008    | SOP-28, SOP-32 | SRAM               | [https://mou.sr/3sFegFF](https://mou.sr/3sFegFF) |
 | U4                    | TPS3613                | MSOP-10        | Battery Management | [https://mou.sr/45Ir2kh](https://mou.sr/45Ir2kh) |
 | U5                    | SN74HCS74              | TSSOP-14       | Dual Flip Flop     | [https://mou.sr/3QYGEuT](https://mou.sr/3QYGEuT) |
-| U6                    | SN74AHC1G08            | SOT-23-5       | 2-input AND Gate   | [https://mou.sr/3Bku2qj](https://mou.sr/3Bku2qj) |
-| U7                    | SN74AHC1G08            | SOT-23-5       | 2-input AND Gate   | [https://mou.sr/3Bku2qj](https://mou.sr/3Bku2qj) |
+| U6                    | SN74AHC1G126           | SC70           | Tri-State Buffer   | [https://mou.sr/3T9Zdim](https://mou.sr/3T9Zdim) |
+| U7                    | SN74AHC1G126           | SC70           | Tri-State Buffer   | [https://mou.sr/3T9Zdim](https://mou.sr/3T9Zdim) |
+| U8                    | SN74AHC1G126           | SC70           | Tri-State Buffer   | [https://mou.sr/3T9Zdim](https://mou.sr/3T9Zdim) |
 | X1                    | 32.768 kHz             | Radial         | Crystal Oscillator | [https://mou.sr/3ZteKuy](https://mou.sr/3ZteKuy) |
 
 ### Note about SW1
@@ -218,7 +221,7 @@ If you have a choice, I recommend against using the original revision-less MBC3 
 
 You can use a few parts from the donor cart on the new board to save some money. Note that you will generally get better reliability with new parts as opposed to old ones. For example: I have seen failed RAM chips from donors in the past.
 
-1) **C1, C2, R2, X1: RTC Components** - You can move over these parts if you're using the real-time clock function. Note that C1 and C2 are designated as C2 and C3 on my board. They're the same value, so they're interchangeable.
+1) **C2, R2, X1, Z1: RTC Components** - You can move over these parts if you're using the real-time clock function. Note that Z1 and C2 are designated as C2 and C3 on my board. They're the same value, so they're interchangeable.
 2) **U2: MBC3A or MBC3B** - This one is required
 3) **U3: SRAM** - You can use this part *only if* the sum of the RAM space for the games you're using is the same or less amount of RAM that the donor cartridge has. If you plan to have separate save data for every game, you'll probably need to buy an AS6C1008.
 
@@ -235,6 +238,7 @@ You could probably transfer over most of the 0.1uF capacitors but they're pretty
 
 ### v1.2
 - Changed C3 to Z1
+- Added nubs on the board edge to prevent the circuit board from rattling around in aftermarket cartridges
 
 ### v1.1
 - Fix schematic errors
@@ -253,6 +257,7 @@ You could probably transfer over most of the 0.1uF capacitors but they're pretty
 - <a href="https://github.com/lesserkuma/FlashGBX">Lesserkuma's FlashGBX software</a>
 - <a href="https://www.ti.com/lit/ds/symlink/tps3613-01.pdf?HQS=dis-mous-null-mousermode-dsf-pf-null-wwe&ts=1698238885366&ref_url=https%253A%252F%252Feu.mouser.com%252F">TPS3613 Datasheet</a>
 - Board outline modified from <a href="https://tinkerer.us/projects/homebrew-gameboy-cartridge.html">Dillon Nichols's Homebrew Gameboy Cartridge project</a>
+- Thanks to <a href="https://github.com/orangeglo">orangeglo</a> for his suggestion of adding spacers around the board edge for better fitment in aftermarket cartridges
 - Some components from <a href="https://github.com/adafruit/Adafruit-Eagle-Library">Adafruit's Eagle parts library</a>
 - Some components from <a href="https://www.snapeda.com/">SnapMagic</a>
 - Thank you to <a href="https://github.com/Gekkio">gekkio</a> for their deep Game Boy knowledge resources, and for collaboration in demystifying some of the design choices on Game Boy cartridges
