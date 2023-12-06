@@ -174,7 +174,7 @@ I haven't tested it, but I believe using battery holders instead of pre-tabbed b
 
 | Reference Designators | Value/Part Number      | Package        | Description        | Source                                           |
 | --------------------- | ---------------------- | -------------- | ------------------ | ------------------------------------------------ |
-| B1                    | CR2032, CR2025, CR2016 | See note above | Backup Battery     | [https://mou.sr/3PLccol](https://mou.sr/3PLccol) |
+| B1                    | CR2025, CR2016, CR2032*| See note above | Backup Battery     | [https://mou.sr/3PLccol](https://mou.sr/3PLccol) |
 | C1                    | 0.1uF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
 | C2                    | 15 pF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3PPorjO](https://mou.sr/3PPorjO) |
 | Z1                    | 15 pF                  | 0603           | Capacitor (MLCC)   | [https://mou.sr/3PPorjO](https://mou.sr/3PPorjO) |
