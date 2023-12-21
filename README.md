@@ -103,12 +103,14 @@ SW2, split into two separate switches SW2A (top half) and SW2B (bottom half), co
 
 SW3, split into two separate switches SW3A (bottom half) and SW3B (top half), controls the order in which the ROM banks (the games) and the RAM banks (the save data) cycle. This table assumes you are using a 1 Mbit SRAM chip, as a 256 Kbit SRAM will share save data across all ROMs.
 
+Please note that SW3A and SW3B are *different* than the SW3A and SW3B on the MBC5 Multicart PCB.
+
 | Mode | SW3A | SW3B | ROM Banks  | RAM Banks   | Game 1     | Game 2     | Game 3     | Game 4     |
 | ---- | ---- | ---- | ---------- | ----------- | ---------- | ---------- | ---------- | ---------- |
-| A    | ON   | OFF  | 2x 2 MB    | 4x 256 Kbit | ROM1, RAM1 | ROM1, RAM2 | ROM2, RAM3 | ROM2, RAM4 |
+| A    | OFF  | ON   | 2x 2 MB    | 4x 256 Kbit | ROM1, RAM1 | ROM1, RAM2 | ROM2, RAM3 | ROM2, RAM4 |
 | B    | OFF  | OFF  | 4x 1 MB    | 4x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 | ROM3, RAM3 | ROM4, RAM4 |
 | C    | ON   | ON   | 2x 2 MB    | 2x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 |            |            |
-| D    | OFF  | ON   | 2x 1 MB    | 2x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 |            |            |
+| D    | ON   | OFF  | 2x 1 MB    | 2x 256 Kbit | ROM1, RAM1 | ROM2, RAM2 |            |            |
 
 *Note: Mode D is useless. Just use Mode C instead.*
 
@@ -116,8 +118,8 @@ SW3, split into two separate switches SW3A (bottom half) and SW3B (top half), co
 
 Here's a list of example cartridges you can make with these settings:
 1) Pokemon Red, Blue, Yellow, and Green on one cartridge with separate save files that changes only via pressing the button, which also resets the game: **Mode 1B** with 1 Mbit SRAM
-2) Pokemon Gold and Silver with separate save files that changes by pressing the button *or* cycling power on the Game Boy: **Mode 2C** with 1 Mbit SRAM
-3) Pokemon Gold and Silver with the same save file that hotswaps when you press the button on the cartridge (changing games during gameplay): **Mode 3C** with 256 Kbit SRAM
+2) Pokemon Gold and Silver with separate save files that changes by pressing the button *or* cycling power on the Game Boy: **Mode 3C** with 1 Mbit SRAM
+3) Pokemon Gold and Silver with the same save file that hotswaps when you press the button on the cartridge (changing games during gameplay): **Mode 2C** with 256 Kbit SRAM
 
 ## How to Program Games
 
