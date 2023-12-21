@@ -200,6 +200,7 @@ Note that this isn't to throw shade at any FRAM-based carts, but for me personal
 | R1                    | 10k                    | 0603           | Resistor           | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
 | R2                    | 330k                   | 0603           | Resistor           | [https://mou.sr/3PZ2pvj](https://mou.sr/3PZ2pvj) |
 | R5                    | 10k                    | 0603           | Resistor           | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
+| R6                    | 10k                    | 0603           | Resistor           | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
 | R8                    | 10k                    | 0603           | Resistor           | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
 | R9                    | 130k                   | 0603           | Resistor           | [https://mou.sr/3MjXliy](https://mou.sr/3MjXliy) |
 | R10                   | 49.9k                  | 0603           | Resistor           | [https://mou.sr/3Q3NRZO](https://mou.sr/3Q3NRZO) |
@@ -252,6 +253,10 @@ You could probably transfer over most of the 0.1uF capacitors but they're pretty
 - Generally, ROM sizes are conveyed in terms of kilobytes (KB) and megabytes (KB, MB). RAM size is usually conveyed in terms of kilobits or megabits (Kbit, Mbit). You can convert Kbit and Mbit to KB and MB by dividing Kbit or Mbit by 8. For example, 256 Kbit = 32 KB.
 
 ## Revision History
+
+### v1.3
+- Fixed debounce circuit for push button
+- Adjusted board edge tabs to better fit in shells
 
 ### v1.2
 - Changed C3 to Z1
