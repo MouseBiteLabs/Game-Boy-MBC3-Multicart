@@ -93,11 +93,11 @@ SW2, split into two separate switches SW2A (top half) and SW2B (bottom half), co
 | Mode | SW2A (Top) | SW2B (Bottom) | Game change with reset? | Game change with button press? | Does the button reset? |
 | ---- | ---------- | ------------- | ----------------------- | ------------------------------ | ---------------------- |
 | 1    | OFF        | OFF           | No                      | Yes                            | Yes                    |
-| 2    | OFF        | ON            | Yes                     | Yes                            | Yes                    |
-| 3    | ON         | OFF           | No                      | Yes                            | No                     |
+| 2    | OFF        | ON            | No                      | Yes                            | No                     |
+| 3    | ON         | OFF           | Yes                     | Yes                            | Yes                    |
 | 4    | ON         | ON            | Yes                     | No                             | No                     |
 
-*Note: Mode 4 is essentially Mode 2, but without button functionality.*
+*Note: Mode 4 does not give function to the push button at all.*
 
 ### Game and Save Data Configuration Switch (SW3)
 
