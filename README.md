@@ -157,6 +157,16 @@ These numbers are for reference only - to help you decide which MBC3 revision to
 | MBC3B | BU3634K  |          0.6 uA            |                31 years                |            1.5 uA       |               13 years               |
 | MBC3B | P-2      |          0.4 uA            |                47 years                |            3.7 uA       |               5 years                |
 
+Here is the same table, but with AS6C1008 SRAM instead of AS6C62256.
+
+| Rev   | P/N      | Current draw (without RTC) | Battery Life Estimate (no RTC, CR2025) | Current draw (with RTC) | Battery Life Estimate (RTC, CR2025)  |
+| ----- | -------- | -------------------------- | -------------------------------------- | ----------------------- | ------------------------------------ |
+| MBC3A | LR38536B |          1.4 uA            |                13 years                |            2.7 uA       |               7 years                |
+| MBC3A | BU3632K  |          1.7 uA            |                11 years                |            2.7 uA       |               7 years                |
+| MBC3A | P-2      |          1.7 uA            |                11 years                |            5.1 uA       |               4 years                |
+| MBC3B | BU3634K  |          1.8 uA            |                10 years                |            2.7 uA       |               7 years                |
+| MBC3B | P-2      |          1.6 uA            |                12 years                |            4.9 uA       |               4 years                |
+
 *If you have one of the revisions of MBC3 chips is missing from the table, please contact me!*
 
 ### Battery Size Considerations
