@@ -1,6 +1,4 @@
-# Game Boy MBC3 Multicart - Under Construction
-
-**Note: v1.3 has been ordered but is considered untested.**
+# Game Boy MBC3 Multicart
 
 This is my design of a flashable MBC3-based multicart for the Game Boy. You can make a 2-in-1 or 4-in-1 cartridge, that changes games based on a button press or power cycling the Game Boy. With this board you can also make a single game, but with the addition of a pressable reset button on the cartridge.
 
