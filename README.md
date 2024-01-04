@@ -147,17 +147,17 @@ To estimate battery life, see <a href="https://github.com/MouseBiteLabs/Game-Boy
 
 The revision of MBC3 chip you are using will influence how much current draw you get, and thus how long your battery life will last. For the test set up, I am replacing the battery with a regulated DC power supply set for 3 VDC for consistency, on my regular MBC3 cart board with an MM1134 chip for U4, and brand new AS6C62256 SRAM.
 
-These numbers are for reference only - to help you decide which MBC3 revision to use for your game, if you have a choice. **The current required for retaining save data on the multicart will be slightly higher due to the extra components compared to a regular MBC3 cartridge.**
+These numbers are for reference only - to help you decide which MBC3 revision to use for your game, if you have a choice. These numbers are similar to a regular MBC3 cartridge, but the current required for retaining save data on the multicart will be slightly higher (about 0.2 uA) due to the extra components.
 
 | Rev   | P/N      | Current draw (without RTC) | Battery Life Estimate (no RTC, CR2025) | Current draw (with RTC) | Battery Life Estimate (RTC, CR2025)  |
 | ----- | -------- | -------------------------- | -------------------------------------- | ----------------------- | ------------------------------------ |
-| MBC3A | LR38536B |          0.2 uA            |               >50 years                |            1.5 uA       |               13 years               |
-| MBC3A | BU3632K  |          0.5 uA            |                37 years                |            1.5 uA       |               13 years               |
-| MBC3A | P-2      |          0.5 uA            |                37 years                |            3.9 uA       |               5 years                |
-| MBC3B | BU3634K  |          0.6 uA            |                31 years                |            1.5 uA       |               13 years               |
-| MBC3B | P-2      |          0.4 uA            |                47 years                |            3.7 uA       |               5 years                |
+| MBC3A | LR38536B |          0.4 uA            |                47 years                |            1.7 uA       |               11 years               |
+| MBC3A | BU3632K  |          0.7 uA            |                27 years                |            1.7 uA       |               11 years               |
+| MBC3A | P-2      |          0.7 uA            |                27 years                |            4.1 uA       |               5 years                |
+| MBC3B | BU3634K  |          0.8 uA            |                24 years                |            1.7 uA       |               11 years               |
+| MBC3B | P-2      |          0.6 uA            |                31 years                |            3.9 uA       |               5 years                |
 
-Here is the same table, but with AS6C1008 SRAM instead of AS6C62256.
+Here is the same table, but with AS6C1008 SRAM instead of AS6C62256. It draws approximately 1 uA more than the AS6C62256.
 
 | Rev   | P/N      | Current draw (without RTC) | Battery Life Estimate (no RTC, CR2025) | Current draw (with RTC) | Battery Life Estimate (RTC, CR2025)  |
 | ----- | -------- | -------------------------- | -------------------------------------- | ----------------------- | ------------------------------------ |
