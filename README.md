@@ -16,7 +16,9 @@ Some examples of fun cartridges you can make with this board are:
 - Both Pokemon Gold and Silver with *the same* save (save files are compatible between versions!)
 - Both Pokemon Gold and Silver with *the same* save that can switch between versions *during gameplay without resetting* (hotswap!)
 - A single copy of Mary-Kate and Ashley - Pocket Planner with two separate save files
- 
+
+![assemblepic](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Multicart/assets/97127539/a54775cb-1d72-4db7-ab48-9b6d3f43d51e)
+
 ![boardscan](https://github.com/MouseBiteLabs/Game-Boy-MBC3-Multicart/assets/97127539/5492ea05-ad0f-49d1-84a7-9b102959b991)
 
 All gerbers and source files can be found in this repo, as this project is fully open source. Technical documentation of the board can be found in the Technical folder.
