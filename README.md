@@ -97,7 +97,7 @@ There are two sizes of SRAM you can use, and the type you use will dictate how y
 
 ### Game Cycling Mode Switch (SW2)
 
-SW2, split into two separate switches SW2A (top half) and SW2B (bottom half), controls how you change games/save data on the cartridge. The following table describes the different settings:
+SW2, split into two separate switches SW2A (bottom half) and SW2B (top half), controls how you change games/save data on the cartridge. The following table describes the different settings:
 
 | Mode | SW2A (Bottom) | SW2B (Top) | Game change with reset? | Game change with button press? | Does the button reset? |
 | ---- | ---------- | ------------- | ----------------------- | ------------------------------ | ---------------------- |
