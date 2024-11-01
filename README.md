@@ -237,8 +237,8 @@ If you're having trouble fitting the circuit board into a shell, because the tab
 | R9                    | 130k                   | 0603           | Resistor           | [https://mou.sr/3MjXliy](https://mou.sr/3MjXliy) |
 | R10                   | 49.9k                  | 0603           | Resistor           | [https://mou.sr/3Q3NRZO](https://mou.sr/3Q3NRZO) |
 | SW1                   | See note               | 5.2 x 5.2mm    | Tactile Switch     | See Note |
-| SW2                   | CAS-D20TA              | J Form Lead    | Dual SPDT          | [https://mou.sr/46gGqF1](https://mou.sr/46gGqF1) |
-| SW3                   | CAS-D20TA              | J Form Lead    | Dual SPDT          | [https://mou.sr/46gGqF1](https://mou.sr/46gGqF1) |
+| SW2                   | CAS-D20TA              | J Form Lead    | Dual SPDT          | [https://mou.sr/44YZNT5](https://mou.sr/44YZNT5) |
+| SW3                   | CAS-D20TA              | J Form Lead    | Dual SPDT          | [https://mou.sr/44YZNT5](https://mou.sr/44YZNT5) |
 | U1                    | 29F032, 29F033         | TSOP-40        | Flash EEPROM       | AliExpress or eBay                               |
 | U2                    | MBC3A or MBC3B         | QFP-32         | MBC3 Mapper        | Donor MBC3 Game Boy cartridge                    |
 | U3                    | AS6C62256, AS6C1008    | SOP-28, SOP-32 | SRAM               | [https://mou.sr/3sFegFF](https://mou.sr/3sFegFF) |
